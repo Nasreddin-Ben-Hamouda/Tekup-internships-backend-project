@@ -7,5 +7,5 @@ import com.internships.rest.data.models.User;
 
 
 public interface UserRepository extends JpaRepository<User, Long> {
-
+	User findByEmail(String email);
 }

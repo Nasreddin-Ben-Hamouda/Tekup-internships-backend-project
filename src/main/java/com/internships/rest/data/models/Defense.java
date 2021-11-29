@@ -1,6 +1,7 @@
 package com.internships.rest.data.models;
 
 import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -43,7 +44,6 @@ public class Defense {
 	@ManyToOne
 	@JoinColumn(name = "panel_id")
 	private Panel panel;
-	
 	@ManyToOne
 	@JoinColumn(name = "reporter_id")
 	private User reporter;
