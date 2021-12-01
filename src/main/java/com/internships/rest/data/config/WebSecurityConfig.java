@@ -1,5 +1,6 @@
 package com.internships.rest.data.config;
 
+import javax.servlet.http.HttpServletResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 
 import com.internships.rest.data.filter.JwtFilter;
 import com.internships.rest.data.services.impl.UserDetailsServiceImpl;
@@ -45,15 +47,33 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests()
-                .antMatchers("/auth/login").permitAll()
-                .antMatchers("/auth/whoami").permitAll()
+    	// Enable CORS and disable CSRF
+         http = http.cors().and().csrf().disable();
+
+        // Set unauthorized requests exception handler
+    	 http = http
+    	            .exceptionHandling()
+    	            .authenticationEntryPoint(
+    	                (request, response, ex) -> {
+    	                    response.sendError(
+    	                        HttpServletResponse.SC_UNAUTHORIZED,
+    	                        ex.getMessage()
+    	                    );
+    	                }
+    	            )
+    	            .and();
+    	
+        http.authorizeRequests()
+                .antMatchers("/user/login").permitAll().filterSecurityInterceptorOncePerRequest(false)
+                //.antMatchers("/user/whoami").permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);;
     }
+    
+   
     
 	@Bean
 	public ModelMapper getModelMapper() {
