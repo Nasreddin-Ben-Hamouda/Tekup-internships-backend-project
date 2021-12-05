@@ -22,6 +22,7 @@ public class UserDTO {
     private int phone;
     private LocalDate birthday;
     private int status;
+    private String photo;
     private RoleDTO roleDTO;
     private ClassDTO classeDTO;
     public void setRole(Role role) {

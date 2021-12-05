@@ -53,6 +53,7 @@ public class User implements UserDetails{
     private JSONObject address;//[city,street,code]
     private int phone;
     private LocalDate birthday;
+	private String photo;
     @Column(columnDefinition = "int default 1")
     private int status;//[1=>active,2=>blocked]
     @ManyToOne
