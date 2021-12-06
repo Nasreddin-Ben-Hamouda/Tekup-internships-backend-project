@@ -20,8 +20,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 
 @Entity
@@ -39,11 +37,9 @@ public class Offer {
 	private String coverPhotoPath;
 	@Column(columnDefinition = "int default 0")
 	private int confirmation;	//[0=>not confirmed yet,1=>confirmed]
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name ="created_by")
 	private User createdBy;
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name ="updated_by")
 	private User updatedBy;
