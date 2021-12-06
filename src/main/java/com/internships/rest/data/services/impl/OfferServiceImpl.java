@@ -68,11 +68,10 @@ public class OfferServiceImpl implements OfferService {
 		OfferDTO offerReturned=null;
 		User userDetails=(User)SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
-		Offer newOffer=mapper.map(offer, Offer.class);
 		Offer oldOffer=this.findById(id);
 		if(oldOffer!=null) {
-			oldOffer.setTitle(newOffer.getTitle());
-			oldOffer.setDescription(newOffer.getDescription());
+			oldOffer.setTitle(offer.getTitle());
+			oldOffer.setDescription(offer.getDescription());
 			oldOffer.setUpdatedBy(userDetails);
 			oldOffer=offerRepo.save(oldOffer);
 			if(oldOffer!=null) {
