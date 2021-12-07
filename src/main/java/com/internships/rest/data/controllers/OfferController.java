@@ -44,7 +44,7 @@ public class OfferController {
 	
 	
 	@GetMapping("/list")
-	public ResponseEntity<?> getAllOffers(@ModelAttribute OfferDTO offer){
+	public ResponseEntity<?> getAllOffers(){
 		
 		return new ResponseEntity<List<OfferDTO>>(offerService.list(),HttpStatus.OK);
 	
@@ -54,7 +54,7 @@ public class OfferController {
 	public ResponseEntity<?> deleteOffer(@PathVariable long id){
 		if(offerService.delete(id))
 			return new ResponseEntity<String>("Offer deleted successfully",HttpStatus.OK);
-		return new ResponseEntity<String>("Offer Not Found",HttpStatus.OK);
+		return new ResponseEntity<String>("Offer Not Found",HttpStatus.NOT_FOUND);
 	}
 
 }

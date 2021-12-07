@@ -65,15 +65,15 @@ public class User implements UserDetails{
 	@ManyToOne
     @JoinColumn(name="class_id")
     private Class classe;//as student
-	@OneToMany(mappedBy = "createdBy",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "createdBy",cascade = CascadeType.REMOVE)
 	private List<Offer> createdOffers;
-	@OneToMany(mappedBy = "updatedBy",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "updatedBy",cascade = CascadeType.REMOVE)
 	private List<Offer> updatedOffers;
-	@OneToMany(mappedBy = "universityFramer",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "universityFramer",cascade = CascadeType.REMOVE)
 	private List<Internship> framedInterships;//as teacher
-	@OneToMany(mappedBy = "reporter",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "reporter",cascade = CascadeType.REMOVE)
 	private List<Defense> reportedDefenses;//as teacher(reporter)
-	@OneToMany(mappedBy = "president",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "president",cascade = CascadeType.REMOVE)
 	private List<Defense> ChairedDefenses;//as teacher(president)
 	@ManyToMany(mappedBy = "students",cascade = CascadeType.DETACH)
 	private List<Internship> passedInterships;//as student

@@ -52,7 +52,7 @@ public class Defense {
 	private User president;
 	@OneToOne(mappedBy = "defense",cascade = CascadeType.REMOVE)
 	private DefenseDecision decision;
-	@OneToMany(mappedBy = "defense",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "defense",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<DefenseAttachement> attachements;
 	@Column(nullable = false)

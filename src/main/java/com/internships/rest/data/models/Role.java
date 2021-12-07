@@ -25,7 +25,7 @@ public class Role {
 	private Long id;
 	@Column(nullable = false)
 	private String title;	//[STUDENT,TEACHER,ADMIN]
-	@OneToMany(mappedBy = "role",cascade = CascadeType.ALL )
+	@OneToMany(mappedBy = "role",cascade = CascadeType.REMOVE )
 	private List<User> users;
 
 }

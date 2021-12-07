@@ -33,7 +33,7 @@ public class Panel {
 	private Long id;
 	@Column(nullable = false)
 	private String name;
-	@OneToMany(mappedBy = "panel",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "panel",cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
 	private List<Defense> Defenses;
 	@OneToMany(mappedBy = "panel",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
