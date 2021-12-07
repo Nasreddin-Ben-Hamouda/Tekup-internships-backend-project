@@ -33,8 +33,13 @@ public class UserDTO {
 	}
     public void setClasse(Class classe) {
     	if(classe!=null) {
-			ModelMapper mapper=new ModelMapper();
-			this.classeDTO=mapper.map(classe, ClassDTO.class);
+    		this.classeDTO=new ClassDTO();
+			if(classe.getId()!=null)
+				this.classeDTO.setId(classe.getId());
+			if(classe.getName()!=null)
+				this.classeDTO.setName(classe.getName());
+			if(classe.getLevel()!=0)
+				this.classeDTO.setLevel(classe.getLevel());
     	}
 	}
     public void setAddress(JSONObject adr) {
