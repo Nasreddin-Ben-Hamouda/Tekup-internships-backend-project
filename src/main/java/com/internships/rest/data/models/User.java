@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.json.JSONObject;
 import org.springframework.security.core.GrantedAuthority;
@@ -65,19 +68,26 @@ public class User implements UserDetails{
 	@ManyToOne
     @JoinColumn(name="class_id")
     private Class classe;//as student
-	@OneToMany(mappedBy = "createdBy",cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "createdBy",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Offer> createdOffers;
-	@OneToMany(mappedBy = "updatedBy",cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "updatedBy",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Offer> updatedOffers;
-	@OneToMany(mappedBy = "universityFramer",cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "universityFramer",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Internship> framedInterships;//as teacher
-	@OneToMany(mappedBy = "reporter",cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "reporter",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Defense> reportedDefenses;//as teacher(reporter)
-	@OneToMany(mappedBy = "president",cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "president",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Defense> ChairedDefenses;//as teacher(president)
-	@ManyToMany(mappedBy = "students",cascade = CascadeType.DETACH)
+	@ManyToMany(mappedBy = "students",cascade = CascadeType.DETACH,fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Internship> passedInterships;//as student
-	@ManyToMany(mappedBy = "teachers",cascade = CascadeType.DETACH)
+	@ManyToMany(mappedBy = "teachers",cascade = CascadeType.DETACH,fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Panel> panels;//as teacher
     @Column(nullable = false)
 	@CreationTimestamp
