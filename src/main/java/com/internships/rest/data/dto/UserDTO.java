@@ -1,6 +1,7 @@
 package com.internships.rest.data.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 import com.internships.rest.data.models.Class;
@@ -25,6 +26,8 @@ public class UserDTO {
     private String photo;
     private RoleDTO roleDTO;
     private ClassDTO classeDTO;
+    private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
     public void setRole(Role role) {
     	if(role!=null) {
 			ModelMapper mapper=new ModelMapper();
