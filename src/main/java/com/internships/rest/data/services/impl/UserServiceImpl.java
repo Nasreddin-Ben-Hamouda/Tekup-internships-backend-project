@@ -72,7 +72,6 @@ public class UserServiceImpl implements UserService{
 					oldUser.setPassword(encoder.encode(user.getPassword()));
 				}
 				oldUser=userRepo.save(oldUser);
-				System.out.println(user);
 				if(oldUser==null)
 					result="User not updated,try again";
 			}else {
