@@ -68,25 +68,25 @@ public class User implements UserDetails{
 	@ManyToOne
     @JoinColumn(name="class_id")
     private Class classe;//as student
-	@OneToMany(mappedBy = "createdBy",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "createdBy",cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Offer> createdOffers;
-	@OneToMany(mappedBy = "updatedBy",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "updatedBy",cascade = CascadeType.REMOVE)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Offer> updatedOffers;
-	@OneToMany(mappedBy = "universityFramer",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "universityFramer",cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Internship> framedInterships;//as teacher
-	@OneToMany(mappedBy = "reporter",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "reporter",cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Defense> reportedDefenses;//as teacher(reporter)
-	@OneToMany(mappedBy = "president",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "president",cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Defense> ChairedDefenses;//as teacher(president)
-	@ManyToMany(mappedBy = "students",cascade = CascadeType.DETACH,fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "students",cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Internship> passedInterships;//as student
-	@ManyToMany(mappedBy = "teachers",cascade = CascadeType.DETACH,fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "teachers",cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Panel> panels;//as teacher
     @Column(nullable = false)

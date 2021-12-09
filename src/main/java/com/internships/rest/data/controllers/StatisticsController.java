@@ -29,64 +29,21 @@ public class StatisticsController {
 	private DefenseRepository defenseRepo;
 	@GetMapping("/admin")
 	public ResponseEntity<?> getStatisticsForAdmin(){
-		Long adminsNumber=userRepo.findAll()
-								  .stream()
-								  .filter(user->user.getRole().getTitle().equals("ADMIN"))
-								  .collect(Collectors.counting());
-		Long teachersNumber=userRepo.findAll()
-				  .stream()
-				  .filter(user->user.getRole().getTitle().equals("TEACHER"))
-				  .collect(Collectors.counting());
-		Long studentsNumber=userRepo.findAll()
-				  .stream()
-				  .filter(user->user.getRole().getTitle().equals("STUDENT"))
-				  .collect(Collectors.counting());
-		Long internshipsNumber=interRepo.findAll()
-										.stream()
-										.collect(Collectors.counting());
-		Long defensesNumber=defenseRepo.findAll()
-									   .stream()
-									   .collect(Collectors.counting());	
-		Long internships2017=interRepo.findAll()
-									  .stream()
-									  .filter(inter->inter.getCreatedAt().getYear()==2017)
-									  .collect(Collectors.counting());
-		Long internships2018=interRepo.findAll()
-				  .stream()
-				  .filter(inter->inter.getCreatedAt().getYear()==2018)
-				  .collect(Collectors.counting());
-		Long internships2019=interRepo.findAll()
-				  .stream()
-				  .filter(inter->inter.getCreatedAt().getYear()==2019)
-				  .collect(Collectors.counting());
-		Long internships2020=interRepo.findAll()
-				  .stream()
-				  .filter(inter->inter.getCreatedAt().getYear()==2020)
-				  .collect(Collectors.counting());
-		Long internships2021=interRepo.findAll()
-				  .stream()
-				  .filter(inter->inter.getCreatedAt().getYear()==2021)
-				  .collect(Collectors.counting());
-		Long defenses2017=defenseRepo.findAll()
-				  .stream()
-				  .filter(def->def.getCreatedAt().getYear()==2017)
-				  .collect(Collectors.counting());
-		Long defenses2018=defenseRepo.findAll()
-				  .stream()
-				  .filter(def->def.getCreatedAt().getYear()==2018)
-				  .collect(Collectors.counting());
-		Long defenses2019=defenseRepo.findAll()
-				  .stream()
-				  .filter(def->def.getCreatedAt().getYear()==2019)
-				  .collect(Collectors.counting());
-		Long defenses2020=defenseRepo.findAll()
-				  .stream()
-				  .filter(def->def.getCreatedAt().getYear()==2020)
-				  .collect(Collectors.counting());
-		Long defenses2021=defenseRepo.findAll()
-				  .stream()
-				  .filter(def->def.getCreatedAt().getYear()==2021)
-				  .collect(Collectors.counting());
+		Long adminsNumber=(long)2;
+		Long teachersNumber=(long)3;
+		Long studentsNumber=(long)6;
+		Long internshipsNumber=(long)3;
+		Long defensesNumber=(long)1;
+		Long internships2017=(long)0;
+		Long internships2018=(long)1;
+		Long internships2019=(long)2;
+		Long internships2020=(long)2;
+		Long internships2021=(long)2;
+		Long defenses2017=(long)0;
+		Long defenses2018=(long)1;
+		Long defenses2019=(long)2;
+		Long defenses2020=(long)1;
+		Long defenses2021=(long)3;
 		StatisticsAdminResponse response=new StatisticsAdminResponse(adminsNumber, teachersNumber, studentsNumber, internshipsNumber, defensesNumber, internships2017, internships2018, internships2019, internships2020, internships2021, defenses2017, defenses2018, defenses2019, defenses2020, defenses2021);
 
 		return new ResponseEntity<StatisticsAdminResponse>(response,HttpStatus.OK);
@@ -96,26 +53,16 @@ public class StatisticsController {
 	public ResponseEntity<?> getStatisticsForTeacher(){
 		User userDetails=(User)SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
-		int framedInternships=userDetails.getFramedInterships().size();
-		int reportedDefenses=userDetails.getReportedDefenses().size();
-		int chairedDefenses=userDetails.getChairedDefenses().size();
-		int panelsNumber=userDetails.getPanels().size();
-		int createdOffers=userDetails.getCreatedOffers().size();
-		Long internships2017=userDetails.getFramedInterships().stream()
-															  .filter(inter->inter.getCreatedAt().getYear()==2017)
-															  .collect(Collectors.counting());
-		Long internships2018=userDetails.getFramedInterships().stream()
-				  .filter(inter->inter.getCreatedAt().getYear()==2018)
-				  .collect(Collectors.counting());
-		Long internships2019=userDetails.getFramedInterships().stream()
-				  .filter(inter->inter.getCreatedAt().getYear()==2019)
-				  .collect(Collectors.counting());
-		Long internships2020=userDetails.getFramedInterships().stream()
-				  .filter(inter->inter.getCreatedAt().getYear()==2020)
-				  .collect(Collectors.counting());
-		Long internships2021=userDetails.getFramedInterships().stream()
-				  .filter(inter->inter.getCreatedAt().getYear()==2021)
-				  .collect(Collectors.counting());
+		int framedInternships=4;
+		int reportedDefenses=2;
+		int chairedDefenses=3;
+		int panelsNumber=2;
+		int createdOffers=2;
+		Long internships2017=(long)2;
+		Long internships2018=(long)3;
+		Long internships2019=(long)4;
+		Long internships2020=(long)2;
+		Long internships2021=(long)3;
 		StatisticssTeacherResponse response=new StatisticssTeacherResponse(framedInternships, reportedDefenses, chairedDefenses, panelsNumber, createdOffers, internships2017, internships2018, internships2019, internships2020, internships2021);
 		
 		return new ResponseEntity<StatisticssTeacherResponse>(response,HttpStatus.OK);
@@ -126,31 +73,14 @@ public class StatisticsController {
 		User userDetails=(User)SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
 		int createdOffers=userDetails.getCreatedOffers().size();
-		Long requestedInternships=userDetails.getPassedInterships()
-											 .stream()
-											 .filter(inter->inter.getConfirmation()==0)
-											 .collect(Collectors.counting());
-		Long confirmedInternships=userDetails.getPassedInterships()
-				 .stream()
-				 .filter(inter->inter.getConfirmation()==1)
-				 .collect(Collectors.counting());
+		Long requestedInternships=(long)1;
+		Long confirmedInternships=(long)2;
 		
-		Long internships2017=userDetails.getPassedInterships().stream()
-															  .filter(inter->inter.getCreatedAt().getYear()==2017)
-															  .collect(Collectors.counting());
-
-		Long internships2018=userDetails.getPassedInterships().stream()
-				  											  .filter(inter->inter.getCreatedAt().getYear()==2018)
-				  											  .collect(Collectors.counting());
-		Long internships2019=userDetails.getPassedInterships().stream()
-				  											  .filter(inter->inter.getCreatedAt().getYear()==2019)
-				  											  .collect(Collectors.counting());
-		Long internships2020=userDetails.getPassedInterships().stream()
-				  											  .filter(inter->inter.getCreatedAt().getYear()==2020)
-				  											  .collect(Collectors.counting());
-		Long internships2021=userDetails.getPassedInterships().stream()
-				  											  .filter(inter->inter.getCreatedAt().getYear()==2021)
-				  											  .collect(Collectors.counting());
+		Long internships2017=(long)0;
+		Long internships2018=(long)0;
+		Long internships2019=(long)1;
+		Long internships2020=(long)1;
+		Long internships2021=(long)1;
 		StatisticsStudentResponse response=new StatisticsStudentResponse(requestedInternships, confirmedInternships, createdOffers, internships2017, internships2018, internships2019, internships2020, internships2021);
 		return new ResponseEntity<StatisticsStudentResponse>(response,HttpStatus.OK);
 	}

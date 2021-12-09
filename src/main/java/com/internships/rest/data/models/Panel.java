@@ -35,10 +35,10 @@ public class Panel {
 	private String name;
 	@OneToMany(mappedBy = "panel",cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
 	private List<Defense> Defenses;
-	@OneToMany(mappedBy = "panel",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "panel",cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<PanelDate> dates;
-	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.DETACH)
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.DETACH)
 	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinTable(name = "teachers_panels",
 	joinColumns = @JoinColumn(name="panel_id"),
